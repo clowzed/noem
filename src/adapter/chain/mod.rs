@@ -1,5 +1,7 @@
 use crate::adapter::Adapter;
 
+pub mod builder;
+
 pub struct Chain<A, B> {
     first: A,
     second: B,

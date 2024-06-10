@@ -1,6 +1,6 @@
 use crate::adapter::Adapter;
 
-use super::chain::Chain;
+use super::Chain;
 
 pub struct ChainBuilder<A> {
     adapter: A,
