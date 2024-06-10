@@ -1,0 +1,65 @@
+name: "Test"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "**" # matches every branch
+
+jobs:
+  check:
+    name: "Run cargo check"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Check out the repo"
+        uses: actions/checkout@v3
+
+      - uses: "actions-rs/toolchain@v1"
+        with:
+          profile: "minimal"
+          toolchain: "stable"
+          override: true
+
+      - uses: "actions-rs/cargo@v1"
+        with:
+          command: "check"
+
+  fmt:
+    name: "Run cargo fmt"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Check out the repo"
+        uses: actions/checkout@v3
+
+      - uses: "actions-rs/toolchain@v1"
+        with:
+          profile: "minimal"
+          toolchain: "stable"
+          override: true
+
+      - run: "rustup component add rustfmt"
+
+      - uses: "actions-rs/cargo@v1"
+        with:
+          command: "fmt"
+          args: "--all -- --check"
+
+  clippy:
+    name: "Run cargo clippy"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Check out the repo"
+        uses: actions/checkout@v3
+
+      - uses: "actions-rs/toolchain@v1"
+        with:
+          profile: "minimal"
+          toolchain: "stable"
+          override: true
+
+      - run: "rustup component add clippy"
+
+      - uses: "actions-rs/cargo@v1"
+        with:
+          command: "clippy"
+          args: "-- -D warnings"

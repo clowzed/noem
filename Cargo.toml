@@ -1,0 +1,31 @@
+[package]
+name = "noem"
+version = "0.0.1"
+edition = "2021"
+license = "MIT"
+description = "Resend mail fetched by different strategies to different places"
+
+[lib]
+name = "noem"
+path = "src/lib.rs"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-imap = { version = "0.9.7", features = [
+	"runtime-tokio",
+	"tokio",
+], default-features = false }
+async-native-tls = { version = "0.5.0", default-features = false, features = [
+	"runtime-tokio",
+] }
+chrono = { version = "0.4.38", features = ["serde"] }
+futures = "0.3.30"
+futures-util = "0.3.30"
+mail-parser = "0.9.3"
+reqwest = { version = "0.12.4", features = ["json", "multipart"] }
+serde = { version = "1.0.203", features = ["derive"] }
+thiserror = "1.0.61"
+tokio = { version = "1.38.0", features = ["full", "tracing"] }
+url = { version = "2.5.0", features = ["serde"] }
